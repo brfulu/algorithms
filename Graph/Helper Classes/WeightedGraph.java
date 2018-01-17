@@ -21,7 +21,7 @@ public class WeightedGraph {
 		int u = e.u();
 		int v = e.v();
 		adj[u].add(e);
-		adj[v].add(e);
+		adj[v].add(new Edge(v, u, e.w()));
 		E++;
 	}
 	
