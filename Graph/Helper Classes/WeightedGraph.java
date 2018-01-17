@@ -1,30 +1,31 @@
 package graph;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class Graph {
+public class WeightedGraph {
 	private final int V;
 	private int E;
-	private List<Integer>[] adj;
+	private List<Edge>[] adj;
 	
-	public Graph(int V) {
+	public WeightedGraph(int V) {
 		this.V = V;
 		E = 0;
-		adj = (ArrayList<Integer>[]) new ArrayList[V];
+		adj = (ArrayList<Edge>[]) new ArrayList[V];
 		for (int i = 0; i < V; i++) {
 			adj[i] = new ArrayList<>();
 		}
 	}
 	
-	public void addEdge(int u, int v) {
-		adj[u].add(v);
-		adj[v].add(u);
+	public void addEdge(Edge e) {
+		int u = e.u();
+		int v = e.v();
+		adj[u].add(e);
+		adj[v].add(e);
 		E++;
 	}
 	
-	public List<Integer> adj(int u) {
+	public List<Edge> adj(int u) {
 		return adj[u];
 	}
 	
@@ -49,8 +50,8 @@ public class Graph {
 		sb.append("E = " + E + newline);
 		for (int u = 0; u < V; u++) {
 			sb.append("adj[" + u + "] = ");
-			for (int v : adj[u]) {
-				sb.append(v + " ");
+			for (Edge e : adj[u]) {
+				sb.append(e + " ");
 			}
 		}
 		return sb.toString();
